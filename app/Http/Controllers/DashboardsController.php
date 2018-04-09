@@ -27,4 +27,10 @@ class DashboardsController extends Controller
         $categories = Category::paginate(20);
         return view('dashboard.allcategories',compact('categories'))->withPatch('adminpanel/category');
     }
+
+    public function allrss()
+    {
+        $allrss = Rss::paginate(20);
+        return view('dashboard.allrss',compact('allrss'))->withPatch('adminpanel/rss');
+    }
 }

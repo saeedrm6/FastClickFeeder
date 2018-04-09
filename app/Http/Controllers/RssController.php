@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use \SimpleXMLElement;
 use App\RssHistory;
+use App\myfunctions\GetAllmeta;
 class RssController extends Controller
 {
     /**
@@ -31,7 +32,7 @@ class RssController extends Controller
     {
         if (Gate::allows('isadmin')){
             $all = Category::all();
-            return view('rss.create',compact(['all']));
+            return view('rss.create',compact('all'));
         }
     }
 
@@ -41,6 +42,18 @@ class RssController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+    public function getcontent($url)
+    {
+        $content = '';
+        try{
+            $content = file_get_contents($url);
+        }catch (Exception $e){
+            $content = $e->getMessage();
+        }
+        return $content;
+    }
+
     public function store(Request $request)
     {
         if (Gate::allows('isadmin')){
@@ -54,7 +67,7 @@ class RssController extends Controller
             if ($rss){
                 $rss->categories()->sync($request->input('categories'));
                 $history = new RssHistory();
-                $history->body=getcontent($rss->url);
+                $history->body=$this->getcontent($rss->url);
                 $rss->history()->save($history);
                 return back()->with('success','The Rss has been Add');
             }else{

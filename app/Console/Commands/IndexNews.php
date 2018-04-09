@@ -48,7 +48,7 @@ class IndexNews extends Command
         foreach ($allRss as $rss){
 
                 $content = @file_get_contents($rss->url);
-                if (strpos($content,'<channel>')){
+                if (strpos($content,'<channel')){
                     $x = @new \SimpleXmlElement($content);
                     foreach($x->channel->item as $entry) {
                         $query = "select `id` from posts where `post_type`='rss' AND `permalink` Like '{$entry->link}'";
@@ -56,14 +56,15 @@ class IndexNews extends Command
                             $post = Post::create([
                                 'user_id'   =>  1,
                                 'rss_id'   =>  $rss->id,
-                                'title'   =>  $entry->title,
+                                'title'   =>  (string)$entry->title,
                                 'content'   =>  null,
-                                'excerpt'   =>  $entry->description,
+                                'excerpt'   =>  (string)$entry->description,
                                 'status'   =>  'publish',
                                 'comment_status'   =>  'open',
                                 'post_type'   =>  'rss',
-                                'permalink'   =>  $entry->link,
+                                'permalink'   =>  (string)$entry->link,
                             ]);
+                            $p_id=$post->id;
                             $get_all_meta = new GetAllmeta();
                             $ary = $get_all_meta->getMeta($post->permalink, array ('keywords','article:tag'), $timeout = 10);
 //                            var_dump($ary);
@@ -83,18 +84,23 @@ class IndexNews extends Command
                                             $tag = Tag::create([
                                                 'name'  =>  $keyword
                                             ]);
+                                            global $p_id;
+                                            $post = Post::find($p_id);
                                             $post->tags()->attach($tag);
                                         }else{
+                                            global $p_id;
+                                            $post = Post::find($p_id);
                                             $tag = Tag::where('name',$keyword)->first();
-                                            $post->tags()->sync($tag);
+                                            $post->tags()->attach($tag);
                                         }
                                     }
                                 }
+                                unset($keywords);
                             }
 
-                            if (isset($ary['article:tag'])){
+                            if (isset($ary["article:tag"])){
                                 $keywords = array();
-                                foreach ($ary['article:tag'] as $keyword){
+                                foreach ($ary["article:tag"] as $keyword){
                                     $keywords[] = $keyword;
                                 }
                                 $keywords = array_unique($keywords);
@@ -111,9 +117,10 @@ class IndexNews extends Command
                                         $post->tags()->attach($tag);
                                     }else{
                                         $tag = Tag::where('name',$keyword)->first();
-                                        $post->tags()->sync($tag);
+                                        $post->tags()->attach($tag);
                                     }
                                 }
+                                unset($keywords);
                             }
                         }else{
                             $history = RssHistory::where('rss_id',$rss->id)->first();

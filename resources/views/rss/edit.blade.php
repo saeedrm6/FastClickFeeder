@@ -1,14 +1,21 @@
-@extends('layouts.app')
+@extends('dashboard.layout')
+
+@section('pagetitle')
+  ویرایش فید : {{$rss->name}}
+@endsection
+
+@section('breadcumb')
+    ویرایش فید : {{$rss->name}}
+@endsection
+
+
 
 @section('content')
     <div class="container">
         <br><br><br>
 
-        <div class="col-md-8">
+        <div class="col-md-12">
             <div class="panel panel-info">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Edit : {{$rss->name}}</h3>
-                </div>
                 <div class="panel-body">
                     <form method="post" action="{{route('rss.update',[$rss->id])}}">
                         {{csrf_field()}}
@@ -42,12 +49,12 @@
 
                         </div>
                         <input type="hidden" name="category_id" value="">
-                        <button type="submit" class="btn btn-success text-center">Save</button>
-                        <a class="btn btn-info" href="{{ url()->previous() }}">Back</a>
-                        <a class="btn btn-danger" href="" onclick="deleterss()">Delete
+                        <button type="submit" class="btn btn-success text-center">ذخیره</button>
+                        <a class="btn btn-info" href="{{ url()->previous() }}">بازگشت</a>
+                        <a class="btn btn-danger" href="" onclick="deleterss()">حذف
                             <script>
                                 function deleterss() {
-                                    var $response = confirm('Do you want to Delete {{$rss->name}} ?');
+                                    var $response = confirm('آیا میخواهید فید   {{$rss->name}} را حذف نمایید?');
                                     if($response){
                                         document.getElementById('deleterss').submit();
                                     }
@@ -63,9 +70,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
-            @include('category.all_category')
-        </div>
+
 
         <br><br><br>
     </div>

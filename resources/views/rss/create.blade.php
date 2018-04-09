@@ -1,28 +1,37 @@
-@extends('layouts.app')
+@extends('dashboard.layout')
+
+@section('pagetitle')
+   افزودن فید جدید
+@endsection
+
+@section('breadcumb')
+    افزودن فید جدید
+@endsection
+
+
 
 @section('content')
     <div class="container">
         <br><br><br>
-
-        <div class="col-md-8">
+        @include('partiuals.errors')
+        @include('partiuals.success')
+        <div class="col-md-12">
             <div class="panel panel-info">
-                <div class="panel-heading">
-                    <h3 class="panel-title">New RSS</h3>
-                </div>
+
                 <div class="panel-body">
                     <form method="post" action="{{route('rss.store')}}">
                         {{csrf_field()}}
                         <div class="form-group">
-                            <input type="text" class="form-control" name="name" placeholder="Name" value="">
+                            <input type="text" class="form-control" name="name" placeholder="نام" value="">
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control" name="url" placeholder="Rss URL" value="">
+                            <input type="text" class="form-control" name="url" placeholder="Rss URL" value=""  dir="ltr">
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control" name="homepage" placeholder="Home Page" value="">
+                            <input type="text" class="form-control" name="homepage" placeholder="وب سایت" value=""  dir="ltr">
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control" name="logo" placeholder="Logo URL" value="">
+                            <input type="text" class="form-control" name="logo" placeholder="Logo URL" value="" dir="ltr">
                         </div>
                         <div class="form-group">
 
@@ -33,15 +42,13 @@
                             </select>
 
                         </div>
-                        <button type="submit" class="btn btn-success text-center">Save</button>
-                        <a class="btn btn-info" href="{{ url()->previous() }}">Back</a>
+                        <button type="submit" class="btn btn-success text-center">ذخیره</button>
+                        <a class="btn btn-info" href="{{ url()->previous() }}">بازگشت</a>
                     </form>
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
-            @include('category.all_category')
-        </div>
+
 
         <br><br><br>
     </div>

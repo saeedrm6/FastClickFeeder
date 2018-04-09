@@ -1,3 +1,10 @@
+<!--
+    Webgardi 24 Exclusive CMS ver 1.0
+    By :     Saeed Rahimi Manesh
+    Web :    Https://RahimiManesh.com
+    Mobile : +98 919 335 0901
+-->
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,6 +16,7 @@
     <link href="{{asset('dashboard/css/font-awesome.min.css')}}" rel="stylesheet">
     <link href="{{asset('dashboard/css/datepicker3.css')}}" rel="stylesheet">
     <link href="{{asset('dashboard/css/styles.css')}}" rel="stylesheet">
+    <link href="{{ asset('css/select2.min.css') }}" rel="stylesheet" />
 
     <!--Theme Switcher-->
     <style id="hide-theme">
@@ -141,6 +149,7 @@
 </div>	<!--/.main-->
 
 <script src="{{asset('dashboard/js/jquery-1.11.1.min.js')}}"></script>
+<script src="{{asset('js/select2.min.js')}}"></script>
 <script src="{{asset('dashboard/js/bootstrap.min.js')}}"></script>
 <script src="{{asset('dashboard/js/chart.min.js')}}"></script>
 <script src="{{asset('dashboard/js/chart-data.js')}}"></script>
@@ -148,7 +157,11 @@
 <script src="{{asset('dashboard/js/easypiechart-data.js')}}"></script>
 <script src="{{asset('dashboard/js/bootstrap-datepicker.js')}}"></script>
 <script src="{{asset('dashboard/js/custom.js')}}"></script>
-
+<script>
+    $(document).ready(function() {
+        $('#cateogries_list').select2();
+    });
+</script>
 
 </body>
 </html>

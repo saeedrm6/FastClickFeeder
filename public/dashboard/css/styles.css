@@ -1043,3 +1043,6 @@ p.back-link {
   direction: rtl;
   text-align: right;
 }
+.pagination{
+  direction: ltr;
+}

@@ -28,7 +28,7 @@
                     </a>
                 </li>
                 <li>
-                    <a class="" href="#">
+                    <a class="" href="">
                         <span class="fa fa-arrow-left">&nbsp;</span> افزودن پست
                     </a>
                 </li>
@@ -36,7 +36,7 @@
         </li>
         <li {{{ (Request::is('adminpanel/category') ? 'class=active parent' : 'parent') }}}>
             <a data-toggle="collapse" href="#sub-item-2" class="collapsed" aria-expanded="false">
-                <em class="fa fa-navicon">&nbsp;</em> دسته بندی ها <span data-toggle="collapse" href="#sub-item-2" class="icon pull-left collapsed" aria-expanded="false"><em class="fa fa-plus"></em></span>
+                <em class="fa fa-table">&nbsp;</em> دسته بندی ها <span data-toggle="collapse" href="#sub-item-2" class="icon pull-left collapsed" aria-expanded="false"><em class="fa fa-plus"></em></span>
             </a>
             <ul class="children collapse" id="sub-item-2" aria-expanded="false" style="height: 0px;">
                 <li>
@@ -45,37 +45,37 @@
                     </a>
                 </li>
                 <li>
-                    <a class="" href="#">
+                    <a class="" href="{{route('category.create')}}">
                         <span class="fa fa-arrow-left">&nbsp;</span> افزودن دسته بندی
                     </a>
                 </li>
             </ul>
         </li>
 
-        <li><a href="charts.html"><em class="fa fa-bar-chart">&nbsp;</em> فید ها</a></li>
 
-        <li><a href="buttons.html"><em class="fa fa-hand-pointer-o">&nbsp;</em> Buttons</a></li>
-        <li><a href="forms.html"><em class="fa fa-pencil-square-o">&nbsp;</em> Forms</a></li>
-        <li><a href="tables.html"><em class="fa fa-table">&nbsp;</em> Tables</a></li>
-        <li><a href="panels.html"><em class="fa fa-clone">&nbsp;</em> Alerts &amp; Panels</a></li>
-        <li><a href="icons.html"><em class="fa fa-star-o">&nbsp;</em> Icons</a></li>
-        <li class="parent "><a data-toggle="collapse" href="#sub-item-1">
-                <em class="fa fa-file-o">&nbsp;</em> Pages <span data-toggle="collapse" href="#sub-item-1" class="icon pull-right"><i class="fa fa-plus"></i></span>
+        <li {{{ (Request::is('adminpanel/rss') ? 'class=active parent' : 'parent') }}}>
+            <a data-toggle="collapse" href="#sub-item-3" class="collapsed" aria-expanded="false">
+                <em class="fa fa-bar-chart-o">&nbsp;</em> فید ها <span data-toggle="collapse" href="#sub-item-3" class="icon pull-left collapsed" aria-expanded="false"><em class="fa fa-plus"></em></span>
             </a>
-            <ul class="children collapse" id="sub-item-1">
-                <li><a class="" href="gallery.html">
-                        Gallery
-                    </a></li>
-                <li><a class="" href="search.html">
-                        Search
-                    </a></li>
-                <li><a class="" href="login.html">
-                        Login
-                    </a></li>
-                <li><a class="" href="error.html">
-                        Error 404
-                    </a></li>
+            <ul class="children collapse" id="sub-item-3" aria-expanded="false" style="height: 0px;">
+                <li>
+                    <a class="" href="{{route('adminpanel.rss')}}">
+                        <span class="fa fa-arrow-left">&nbsp;</span> همه ی فید ها
+                    </a>
+                </li>
+                <li>
+                    <a class="" href="{{route('rss.create')}}">
+                        <span class="fa fa-arrow-left">&nbsp;</span> افزودن فید
+                    </a>
+                </li>
             </ul>
         </li>
+
+        <li><a href=""><em class="fa fa-money">&nbsp;</em> امور مالی</a></li>
+        <li><a onclick="event.preventDefault(); document.getElementById('logout-form').submit();" href="{{ route('logout') }}"><em class="fa fa-sign-out">&nbsp;</em> خروج</a></li>
+
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+            @csrf
+        </form>
     </ul>
 </div>

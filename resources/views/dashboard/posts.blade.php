@@ -15,9 +15,10 @@
             <thead>
                 <tr class="text-right rtl">
                     <th class="text-right rtl">عنوان</th>
-                    <th class="text-right rtl">دسته ها</th>
+                    <th class="text-right rtl">نام</th>
                     <th class="text-right rtl">برچسب ها</th>
                     <th class="text-right rtl">تاریخ</th>
+                    <th class="text-right rtl">بازدید</th>
                     <th class="text-right rtl">پست تایپ</th>
                 </tr>
             </thead>
@@ -43,8 +44,17 @@
                         <td>
                             {{$post->created_at}}
                         </td>
+                        <td>0</td>
                         <td>
-                            {{$post->post_type}}
+                            @if($post->post_type == 'rss')
+                                <p class="btn btn-danger text-danger">
+                                    {{$post->post_type}}
+                                </p>
+                                @else
+                                <p class="btn btn-success text-success">
+                                    {{$post->post_type}}
+                                </p>
+                            @endif
                         </td>
                     </tr>
                     @endforeach

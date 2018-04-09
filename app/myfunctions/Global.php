@@ -76,12 +76,23 @@ class GetAllmeta {
         return $ary;
     }
 }
-$get_all_meta = new GetAllmeta();
-$test = array(1,2,3,4,5,6,1,1,2,4);
+//$get_all_meta = new GetAllmeta();
+//$test = array(1,2,3,4,5,6,1,1,2,4);
 //dd(array_unique($test));
 
+
+//$content = file_get_contents('https://www.zoomit.ir/feed/');
+//$x = @new \SimpleXmlElement($content);
+//foreach($x->channel->item as $entry) {
+//    echo $entry->title;
+//}
+
+
+
+
 // With more params
-//$ary = $m->getMeta('https://nava.ir/story/concert/%da%a9%d9%86%d8%b3%d8%b1%d8%aa-%d9%86%d9%88%d8%b1%d9%88%d8%b2%db%8c-%d8%b9%d9%84%db%8c%d8%b1%d8%b6%d8%a7-%d8%b7%d9%84%db%8c%d8%b3%da%86%db%8c-%d8%a8%d8%b1%da%af%d8%b2%d8%a7%d8%b1-%d8%b4%d8%af', array ('keywords','article:tag'), $timeout = 10);
+//$ary = $m->getMeta('https://click.ir/1397/01/20/iranian-messengers-app-store-deleted/', array ('keywords','article:tag'), $timeout = 10);
+//$ary = $get_all_meta->getMeta('https://click.ir/1397/01/20/iranian-messengers-app-store-deleted/', array ('keywords','article:tag'), $timeout = 10);
 //$ary = $m->getMeta('https://www.isna.ir/news/97011403001/%D8%A7%D8%B3%D8%AA%D8%B9%D9%81%D8%A7%DB%8C-%D9%86%D8%AC%D9%81%DB%8C-%D8%A8%D9%87-%D8%B1%D8%A7%D8%AD%D8%AA%DB%8C-%D9%BE%D8%B0%DB%8C%D8%B1%D9%81%D8%AA%D9%87-%D9%86%D9%85%DB%8C-%D8%B4%D9%88%D8%AF-%D8%A7%D9%86%D8%AA%D8%AE%D8%A7%D8%A8-%D8%B3%D8%B1%D9%BE%D8%B1%D8%B3%D8%AA-%D8%A8%D8%B1%D8%A7%DB%8C-%D8%B4%D9%87%D8%B1%D8%AF%D8%A7%D8%B1%DB%8C', array ('keywords','article:tag'), $timeout = 10);
 //$ary = $get_all_meta->getMeta('https://www.nytimes.com/2018/04/02/us/politics/trump-immigration-mexico-daca.html?hp&action=click&pgtype=Homepage&clickSource=story-heading&module=first-column-region&region=top-news&WT.nav=top-news', array ('keywords','article:tag'), $timeout = 10);
 //if (isset($ary['keywords'])){

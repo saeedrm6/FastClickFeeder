@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\CategoryRss;
 use App\Rss;
 use App\RssHistory;
 use Gate;
@@ -117,11 +118,16 @@ class CategoriesController extends Controller
     {
         if (Gate::allows('isadmin')){
             $name = $category->name;
+            $cat_id = $category->id;
             $category->delete();
-            $all = Category::all();
-            return view('category.create',compact('all'))->with('success','The category has been deleted');
+            $acategoriesrss = CategoryRss::where('category_id',$cat_id)->get();
+            foreach ($acategoriesrss as $history){
+                $history->delete();
+            }
+            return view('category.create')->with('success','The category has been deleted');
+        }else{
+            abort(404);
         }
-        abort(404);
     }
 
     public function add_rss(Request $request, Category $category)

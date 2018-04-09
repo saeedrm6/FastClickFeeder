@@ -26,6 +26,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('adminpanel','DashboardsController@index')->name('adminpanel.index');
     Route::get('adminpanel/posts','DashboardsController@allposts')->name('adminpanel.posts');
     Route::get('adminpanel/category','DashboardsController@allcategories')->name('adminpanel.categories');
+    Route::get('adminpanel/rss','DashboardsController@allrss')->name('adminpanel.rss');
 });
 Route::resource('category','CategoriesController');
 Route::resource('rss','RssController');
