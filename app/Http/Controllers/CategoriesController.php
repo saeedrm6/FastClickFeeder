@@ -130,6 +130,17 @@ class CategoriesController extends Controller
         }
     }
 
+    public function getcontent($url)
+    {
+        $content = '';
+        try{
+            $content = file_get_contents($url);
+        }catch (Exception $e){
+            $content = $e->getMessage();
+        }
+        return $content;
+    }
+
     public function add_rss(Request $request, Category $category)
     {
         if (Gate::allows('isadmin')){
@@ -144,7 +155,7 @@ class CategoriesController extends Controller
             if ($rss){
                 $category->rss()->save($rss);
                 $history = new RssHistory();
-                $history->body=getcontent($rss->url);
+                $history->body=$this->getcontent($rss->url);
                 $rss->history()->save($history);
                 return back()->with('success','Rss added To Category');
             }
