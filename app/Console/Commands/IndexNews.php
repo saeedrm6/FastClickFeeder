@@ -51,8 +51,9 @@ class IndexNews extends Command
             if (strpos($content,'<channel')){
                 $x = @new \SimpleXmlElement($content);
                 foreach($x->channel->item as $entry) {
-                    $query = "select `id` from posts where `post_type`='rss' AND `permalink` Like '{$entry->link}'";
-                    if (count(\DB::select($query))==0){
+                    $getposts = Post::where('post_type','=','rss')->where('permalink','=',$entry->link)->get();
+//                    $query = "select `id` from posts where `post_type`='rss' AND `permalink` Like '{$entry->link}'";
+                    if (count($getposts)==0){
                         $post = Post::create([
                             'user_id'   =>  1,
                             'rss_id'   =>  $rss->id,
