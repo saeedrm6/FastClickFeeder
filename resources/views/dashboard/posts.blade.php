@@ -20,6 +20,7 @@
                     <th class="text-right rtl">تاریخ</th>
                     <th class="text-right rtl">بازدید</th>
                     <th class="text-right rtl">پست تایپ</th>
+                    <th class="text-right rtl">وضعیت</th>
                 </tr>
             </thead>
 
@@ -55,6 +56,40 @@
                                     {{$post->post_type}}
                                 </p>
                             @endif
+                        </td>
+                        <td>
+                            @if($post->status == 'publish')
+                                <b class="text-success" style="font-size: 12px;">منتشر شده</b> &nbsp; <a href="#" onclick="deactivepost();" class="fa fa-window-close-o text-danger">
+                                @else
+                                    <b class="text-danger">معلق</b> &nbsp; <a href="#" onclick="republish();" class="fa fa-check-circle text-success">
+                                    <script>
+                                        function republish() {
+                                            var $response = confirm('آیا میخواهید این پست را دوباره فعال کنید؟');
+                                            if ($response){
+                                                document.getElementById('republish').submit();
+                                            }
+                                        }
+                                    </script>
+                                            <form id="republish" action="{{route('posts.republish',[$post->id])}}" method="post" style="display: none;">
+                                                {{csrf_field()}}
+                                                <input type="hidden" name="postid" value="{{$post->id}}">
+                                                <input type="submit">
+                                            </form>
+                                @endif
+                                <script>
+                                    function deactivepost() {
+                                        var $response = confirm('آیا میخواهید این پست را غیر فعال کنید؟');
+                                        if ($response){
+                                            document.getElementById('deactivepost').submit();
+                                        }
+                                    }
+                                </script>
+                            </a>
+                            <form id="deactivepost" action="{{route('posts.deactive',[$post->id])}}" method="post" style="display: none;">
+                                {{csrf_field()}}
+                                <input type="hidden" name="postid" value="{{$post->id}}">
+                                <input type="submit">
+                            </form>
                         </td>
                     </tr>
                     @endforeach

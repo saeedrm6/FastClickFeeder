@@ -27,10 +27,13 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('adminpanel/posts','DashboardsController@allposts')->name('adminpanel.posts');
     Route::get('adminpanel/category','DashboardsController@allcategories')->name('adminpanel.categories');
     Route::get('adminpanel/rss','DashboardsController@allrss')->name('adminpanel.rss');
+    Route::post('posts/deactive','PostsController@deactive')->name('posts.deactive');
+    Route::post('posts/republish','PostsController@republish')->name('posts.republish');
 });
 Route::resource('category','CategoriesController');
 Route::resource('rss','RssController');
 Route::resource('tags','TagsController');
+Route::resource('posts','PostsController');
 Route::get('tags/{tagname}','TagsController@show');
 
 
