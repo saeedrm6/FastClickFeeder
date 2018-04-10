@@ -67,11 +67,15 @@ class IndexNews extends Command
                         ]);
                         $p_id=$post->id;
                         $get_all_meta = new GetAllmeta();
-                        $ary = $get_all_meta->getMeta($post->permalink, array ("keywords","article:tag"), $timeout = 10);
+                        $ary = $get_all_meta->getMeta($post->permalink, array ("keywords","article:tag"), $timeout = 30);
                         if (isset($ary["keywords"])){
                             $keywords = $ary["keywords"];
                             if (!is_array($keywords)){
-                                $keywords = explode("،",$keywords);
+                                if (strpos($keywords,",")){
+                                    $keywords = explode(",",$keywords);
+                                }else{
+                                    $keywords = explode("،",$keywords);
+                                }
                                 $keywords = array_unique($keywords);
                                 foreach ($keywords as $keyword){
                                     $tags = Tag::where('name',$keyword)->get();
@@ -97,6 +101,7 @@ class IndexNews extends Command
                                 $keywords[] = $keyword;
                             }
                             $keywords = array_unique($keywords);
+                            $articletag = $keywords;
                             foreach ($keywords as $keyword){
                                 $tags = Tag::where('name',$keyword)->get();
                                 if (count($tags) == 0){
@@ -113,6 +118,8 @@ class IndexNews extends Command
                             }
                             unset($keywords);
                         }
+
+
                     }else{
                         $history = RssHistory::where('rss_id',$rss->id)->first();
                         $history->latest_version = $history->version;
