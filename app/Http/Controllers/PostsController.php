@@ -47,6 +47,7 @@ class PostsController extends Controller
     public function show(Post $post)
     {
         if ($post->status == 'publish'){
+            $post->setview($post->id);
             return view('posts.layout',compact('post'));
         }
         abort(404);

@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\PostMeta;
 use App\Tag;
 use Illuminate\Console\Command;
 use App\Rss;
@@ -65,6 +66,10 @@ class IndexNews extends Command
                             'post_type'   =>  'rss',
                             'permalink'   =>  (string)$entry->link,
                         ]);
+                        $meta = new PostMeta();
+                        $meta->meta_key = 'views';
+                        $meta->meta_value = 0;
+                        $post->postmetas()->save($meta);
                         $p_id=$post->id;
                         $get_all_meta = new GetAllmeta();
                         $ary = $get_all_meta->getMeta($post->permalink, array ("keywords","article:tag"), $timeout = 30);
