@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\Rss;
+use App\Tag;
 use Illuminate\Http\Request;
 use App\Post;
 
@@ -13,7 +14,8 @@ class DashboardsController extends Controller
     {
         $allposts=Post::get()->count();
         $allrss=Rss::get()->count();
-        return view('dashboard.dashboard',compact('allposts','allrss'));
+        $alltags=Tag::get()->count();
+        return view('dashboard.dashboard',compact('allposts','allrss','alltags'));
     }
 
     public function allposts()

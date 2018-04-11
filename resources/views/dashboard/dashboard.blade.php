@@ -23,9 +23,9 @@
         <div class="col-xs-6 col-md-3">
             <div class="panel panel-default">
                 <div class="panel-body easypiechart-panel">
-                    <h4>نظر ها</h4>
-                    <div class="easypiechart" id="easypiechart-orange" data-percent="65">
-                        <span class="percent">65%</span>
+                    <h4>تگ ها</h4>
+                    <div class="easypiechart" id="easypiechart-orange" data-percent="{{$alltags}}">
+                        <span class="percent">{{$alltags}}</span>
                     </div>
                 </div>
             </div>
@@ -34,7 +34,7 @@
             <div class="panel panel-default">
                 <div class="panel-body easypiechart-panel">
                     <h4>فید ها</h4>
-                    <div class="easypiechart" id="easypiechart-teal" >
+                    <div class="easypiechart" id="easypiechart-teal" data-percent="{{$allrss}}" >
                         <span class="percent">{{$allrss}}</span>
                     </div>
                 </div>
@@ -44,7 +44,7 @@
             <div class="panel panel-default">
                 <div class="panel-body easypiechart-panel">
                     <h4>پست ها</h4>
-                    <div class="easypiechart" id="easypiechart-red" >
+                    <div class="easypiechart" id="easypiechart-red" data-percent="{{$allposts}}">
                         <span class="percent">{{$allposts}}</span>
                     </div>
                 </div>
