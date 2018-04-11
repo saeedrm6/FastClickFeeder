@@ -58,38 +58,14 @@
                             @endif
                         </td>
                         <td>
-                            @if($post->status == 'publish')
-                                <b class="text-success" style="font-size: 12px;">منتشر شده</b> &nbsp; <a href="#" onclick="deactivepost();" class="fa fa-window-close-o text-danger">
-                                @else
-                                    <b class="text-danger">معلق</b> &nbsp; <a href="#" onclick="republish();" class="fa fa-check-circle text-success">
-                                    <script>
-                                        function republish() {
-                                            var $response = confirm('آیا میخواهید این پست را دوباره فعال کنید؟');
-                                            if ($response){
-                                                document.getElementById('republish').submit();
-                                            }
-                                        }
-                                    </script>
-                                            <form id="republish" action="{{route('posts.republish',[$post->id])}}" method="post" style="display: none;">
-                                                {{csrf_field()}}
-                                                <input type="hidden" name="postid" value="{{$post->id}}">
-                                                <input type="submit">
-                                            </form>
-                                @endif
-                                <script>
-                                    function deactivepost() {
-                                        var $response = confirm('آیا میخواهید این پست را غیر فعال کنید؟');
-                                        if ($response){
-                                            document.getElementById('deactivepost').submit();
-                                        }
-                                    }
-                                </script>
-                            </a>
-                            <form id="deactivepost" action="{{route('posts.deactive',[$post->id])}}" method="post" style="display: none;">
-                                {{csrf_field()}}
-                                <input type="hidden" name="postid" value="{{$post->id}}">
-                                <input type="submit">
-                            </form>
+                            @switch($post->status)
+                                @case('publish')
+                                    <a href="#" onclick="deactivepost({{$post->id}});" class="fa fa-check-circle text-success"></a>
+                                    @break
+                                @case('inherit')
+                                    <a href="#" onclick="reactivepost({{$post->id}});" class="fa fa-window-close-o text-danger"></a>
+                                    @break
+                                @endswitch
                         </td>
                     </tr>
                     @endforeach
@@ -98,4 +74,33 @@
         {{ $posts->links() }}
     </div>
 </div>
+<script>
+    function deactivepost(postid) {
+        var $response = confirm('آیا میخواهید این پست را غیر فعال کنید؟');
+        if ($response){
+            deactiveform = document.forms['deactivepost'];
+            deactiveform.elements["postid"].value = postid;
+            document.getElementById('deactivepost').submit();
+        }
+    }
+
+    function reactivepost(postid) {
+        var $response = confirm('آیا میخواهید این پست را دوباره فعال کنید؟');
+        if ($response){
+            reactiveform = document.forms['reactivepost'];
+            reactiveform.elements["postid"].value = postid;
+            document.getElementById('reactivepost').submit();
+        }
+    }
+</script>
+<form id="deactivepost" action="{{route('posts.deactive')}}" method="post" style="display: none;">
+    {{csrf_field()}}
+    <input type="hidden" id="postid" name="postid" value="">
+    <input type="submit">
+</form>
+<form id="reactivepost" action="{{route('posts.republish')}}" method="post" style="display: none;">
+    {{csrf_field()}}
+    <input type="hidden" name="postid" id="postid" value="">
+    <input type="submit">
+</form>
 @endsection
