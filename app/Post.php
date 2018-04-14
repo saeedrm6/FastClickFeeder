@@ -30,9 +30,11 @@ class Post extends Model
         return $this->hasMany('App\PostMeta');
     }
 
-    public function getview(Post $post)
+    public function getview()
     {
-        return $post->postmetas('meta_key','views')->first()->meta_value;
+//        return $this->postmetas('meta_key','views')->first()->meta_value;
+//        return $this->hasOne('App\PostMeta')->where('meta_key','=','views')->select(['meta_value']);
+        return $this->hasOne('App\PostMeta')->where('meta_key','=','views');
     }
 
     public function setview($postid)
