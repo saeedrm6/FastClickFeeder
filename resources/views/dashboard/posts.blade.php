@@ -27,7 +27,7 @@
             <tbody>
                 @foreach($posts as $post)
                     <tr>
-                        <td width="350"><a target="_blank" href="{{$post->permalink}}" title="{{$post->title}}">{{$post->title}}</a></td>
+                        <td width="350"><a target="_blank" href="{{route('posts.show',[$post->id])}}" title="{{$post->title}}">{{$post->title}}</a></td>
                         @if($post->post_type == 'rss')
                             <td>
                                 <?php
@@ -45,7 +45,7 @@
                         <td>
                             {{$post->created_at}}
                         </td>
-                        <td>0</td>
+                        <td>{{$post->getview->meta_value}}</td>
                         <td>
                             @if($post->post_type == 'rss')
                                 <p class="btn btn-danger text-danger">

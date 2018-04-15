@@ -50,5 +50,33 @@
                 </div>
             </div>
         </div>
+
+        <div class="clearfix"></div>
+        <div class="col-md-4 pull-right">
+            <div class="panel panel-danger">
+                <div class="panel-heading">
+                    <h3 class="panel-title">بیشتر بازدید ها در 24 ساعت گذشته</h3>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-responsive table-striped">
+                        <tbody>
+                            <tr>
+                                <td>عنوان</td>
+                                <td>بازدید</td>
+                            </tr>
+                            @foreach($mostview as $view)
+                                <tr>
+                                    <td><a href="{{route('posts.show',[$view->id])}}">{{$view->title}}</a></td>
+                                    <td>{{$view->meta_value}}</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4"></div>
+        <div class="col-md-4"></div>
+        <div class="clearfix"></div>
     </div>
 @endsection

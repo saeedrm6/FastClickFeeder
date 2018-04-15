@@ -12,10 +12,22 @@ class DashboardsController extends Controller
 {
     public function index()
     {
+
         $allposts=Post::get()->count();
         $allrss=Rss::get()->count();
         $alltags=Tag::get()->count();
-        return view('dashboard.dashboard',compact('allposts','allrss','alltags'));
+
+
+        #Get most view latest 24 Hour ago
+        $today = date('Y-m-d');
+        $lastday = date("Y-m-d", strtotime("-1 day") );
+        $mostview = \DB::table('posts')
+            ->join('postmeta', 'posts.id', '=', 'postmeta.post_id')
+            ->whereDate('created_at',$today)
+            ->whereTime('created_at', '>', '00:00')
+            ->orderBy(\DB::raw('ABS(postmeta.meta_value)'), 'DESC')
+            ->take(8)->get();
+        return view('dashboard.dashboard',compact('allposts','allrss','alltags','mostview'));
     }
 
     public function allposts()
