@@ -15,6 +15,10 @@ function is_indexed($post_type,$permalink){
 
 }
 
+function strip_tag($tag){
+    return str_replace(' ','-',$tag);
+}
+
 //$tags = get_meta_tags("https://click.ir/1397/01/09/samsung-galaxy-note-9/");
 //dd($tags);
 

@@ -7,11 +7,16 @@ use App\Rss;
 use App\Tag;
 use Illuminate\Http\Request;
 use App\Post;
-
+use Illuminate\Support\Facades\Redis;
+use Illuminate\Support\Facades\Cache;
 class DashboardsController extends Controller
 {
     public function index()
     {
+
+//        $allposts = Cache::get('dashboard-allposts') ? Cache::get('dashboard-allposts') : Cache::put('dashboard-allposts',Post::get()->count(),1);
+//        $allrss = Cache::get('dashboard-allrss') ? Cache::get('dashboard-allrss') : Cache::put('dashboard-allrss',Rss::get()->count(),1);
+//        $alltags = Cache::get('dashboard-alltags') ? Cache::get('dashboard-alltags') : Cache::put('dashboard-alltags',Tag::get()->count(),1);
 
         $allposts=Post::get()->count();
         $allrss=Rss::get()->count();
@@ -46,5 +51,11 @@ class DashboardsController extends Controller
     {
         $allrss = Rss::paginate(20);
         return view('dashboard.allrss',compact('allrss'))->withPatch('adminpanel/rss');
+    }
+
+    public function alltags()
+    {
+        $alltags = Tag::paginate(20);
+        return view('dashboard.alltags',compact('alltags'))->withPatch('adminpanel/tags');
     }
 }

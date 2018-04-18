@@ -14,4 +14,8 @@ class Tag extends Model
     	return $this->belongsToMany('App\Post');
     }
 
+    public function menus()
+    {
+        return $this->belongsToMany('App\Menu');
+    }
 }

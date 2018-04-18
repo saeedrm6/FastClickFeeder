@@ -9,11 +9,21 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 //require_once "../app/myfunctions/global.php";
 
+use Illuminate\Support\Facades\Redis;
+use Illuminate\Support\Facades\Cache;
+
 Route::get('/', function () {
-    return view('welcome');
+    $today = date('Y-m-d');
+    $mostviews = \DB::table('posts')
+        ->join('postmeta', 'posts.id', '=', 'postmeta.post_id')
+        ->whereDate('created_at',$today)
+        ->whereTime('created_at', '>', '00:00')
+        ->orderBy(\DB::raw('ABS(postmeta.meta_value)'), 'DESC')
+        ->take(4)->get();
+//    dd($mostviews);
+    return view('website.homepage',compact('mostviews'));
 });
 
 Auth::routes();
@@ -27,6 +37,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('adminpanel/posts','DashboardsController@allposts')->name('adminpanel.posts');
     Route::get('adminpanel/category','DashboardsController@allcategories')->name('adminpanel.categories');
     Route::get('adminpanel/rss','DashboardsController@allrss')->name('adminpanel.rss');
+    Route::get('adminpanel/tags','DashboardsController@alltags')->name('adminpanel.tags');
     Route::post('posts/deactive','PostsController@deactive')->name('posts.deactive');
     Route::post('posts/republish','PostsController@republish')->name('posts.republish');
 });

@@ -71,6 +71,29 @@
             </ul>
         </li>
 
+        <li {{{ (Request::is('adminpanel/tags') ? 'class=active parent' : 'parent') }}}>
+            <a data-toggle="collapse" href="#sub-item-4" class="collapsed" aria-expanded="false">
+                <em class="fa fa-tags">&nbsp;</em> تگ ها <span data-toggle="collapse" href="#sub-item-4" class="icon pull-left collapsed" aria-expanded="false"><em class="fa fa-plus"></em></span>
+            </a>
+            <ul class="children collapse" id="sub-item-4" aria-expanded="false" style="height: 0px;">
+                <li>
+                    <a class="" href="{{route('adminpanel.tags')}}">
+                        <span class="fa fa-arrow-left">&nbsp;</span> همه ی تگ ها
+                    </a>
+                </li>
+                <li>
+                    <a class="" href="{{route('rss.create')}}">
+                        <span class="fa fa-arrow-left">&nbsp;</span> افزودن تگ
+                    </a>
+                </li>
+                <li>
+                    <a class="" href="{{route('rss.create')}}">
+                        <span class="fa fa-arrow-left">&nbsp;</span>مدیریت تگ های صفحه ای
+                    </a>
+                </li>
+            </ul>
+        </li>
+
         <li><a href=""><em class="fa fa-money">&nbsp;</em> امور مالی</a></li>
         <li><a onclick="event.preventDefault(); document.getElementById('logout-form').submit();" href="{{ route('logout') }}"><em class="fa fa-sign-out">&nbsp;</em> خروج</a></li>
 

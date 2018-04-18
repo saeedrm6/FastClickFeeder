@@ -13,14 +13,14 @@ class CreatePostmetaTable extends Migration
      */
     public function up()
     {
-        Schema::create('postmeta', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('post_id')->unsigned();
-            $table->string('meta_key');
-            $table->string('meta_value');
-
-            $table->foreign('post_id')->references('posts')->on('id');
-        });
+//        Schema::create('postmeta', function (Blueprint $table) {
+//            $table->increments('id');
+//            $table->integer('post_id')->unsigned();
+//            $table->string('meta_key');
+//            $table->string('meta_value');
+//
+//            $table->foreign('post_id')->references('posts')->on('id');
+//        });
     }
 
     /**
@@ -30,6 +30,6 @@ class CreatePostmetaTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('postmeta');
+//        Schema::dropIfExists('postmeta');
     }
 }
