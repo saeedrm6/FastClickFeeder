@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\Menu;
 use App\Rss;
 use App\Tag;
 use Illuminate\Http\Request;
 use App\Post;
 use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Cache;
+
 class DashboardsController extends Controller
 {
     public function index()
@@ -57,5 +59,29 @@ class DashboardsController extends Controller
     {
         $alltags = Tag::paginate(20);
         return view('dashboard.alltags',compact('alltags'))->withPatch('adminpanel/tags');
+    }
+
+    public function hottags()
+    {
+        if(!Cache::get('alltags')){
+            Cache::put('alltags',Tag::all(),10);
+        }
+        $alltags = Cache::get('alltags');
+        $menu = Menu::where('name','hottags')->count();
+        if ($menu == 0){
+            $menu = Menu::create([
+                'name'   =>  'hottags'
+            ]);
+        }
+        $menu = Menu::where('name','hottags')->first();
+        $hottags = $menu->tags;
+        return view('dashboard.hottags',compact('alltags','hottags'));
+    }
+
+    public function hottagssave(Request $request)
+    {
+        $menu = Menu::where('name','hottags')->first();
+        $menu->tags()->sync($request->input('hottags'));
+        return redirect(route('adminpanel.hottags'))->with('success','تگ های داغ بروز شدند');
     }
 }

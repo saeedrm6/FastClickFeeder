@@ -22,8 +22,8 @@ Route::get('/', function () {
         ->whereTime('created_at', '>', '00:00')
         ->orderBy(\DB::raw('ABS(postmeta.meta_value)'), 'DESC')
         ->take(4)->get();
-//    dd($mostviews);
-    return view('website.homepage',compact('mostviews'));
+    $hottags = \App\Menu::where('name','hottags')->first()->tags;
+    return view('website.homepage',compact('mostviews','hottags'));
 });
 
 Auth::routes();
@@ -38,6 +38,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('adminpanel/category','DashboardsController@allcategories')->name('adminpanel.categories');
     Route::get('adminpanel/rss','DashboardsController@allrss')->name('adminpanel.rss');
     Route::get('adminpanel/tags','DashboardsController@alltags')->name('adminpanel.tags');
+    Route::get('adminpanel/tags/hottags','DashboardsController@hottags')->name('adminpanel.hottags');
+    Route::post('adminpanel/tags/hottags','DashboardsController@hottagssave')->name('adminpanel.savehottags');
     Route::post('posts/deactive','PostsController@deactive')->name('posts.deactive');
     Route::post('posts/republish','PostsController@republish')->name('posts.republish');
 });

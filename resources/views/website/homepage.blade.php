@@ -9,14 +9,9 @@
     <div class="container">
         <section class="tagsdiv">
             <ul class="nav ">
-                <li><a href="" target="_blank" title="">#تگ</a></li>
-                <li><a href="" target="_blank" title="">#تگ</a></li>
-                <li><a href="" target="_blank" title="">#تگ</a></li>
-                <li><a href="" target="_blank" title="">#تگ</a></li>
-                <li><a href="" target="_blank" title="">#تگ</a></li>
-                <li><a href="" target="_blank" title="">#تگ</a></li>
-                <li><a href="" target="_blank" title="">#تگ</a></li>
-                <li><a href="" target="_blank" title="">#تگ</a></li>
+                @foreach($hottags as $hot)
+                    <li><a href="{{env('APP_URL')}}/tags/{{str_replace(' ','-',$hot->name)}}" target="_blank" title="">#{{$hot->name}}</a></li>
+                @endforeach
             </ul>
         </section>
         <div class="clearfix"></div>
@@ -52,6 +47,81 @@
                 </div>
             @endforeach
 
+        </section>
+        <div class="clearfix"></div>
+        <section id="homemenu" dir="rtl">
+            <div class="col-md-1 col-xs-2">
+                <a href="">
+                    <i class="fa fa-4x fa-internet-explorer"></i>
+                    <h2>وب و اینترنت</h2>
+                </a>
+            </div>
+            <div class="col-md-1 col-xs-2">
+                <a href="">
+                    <i class="fa fa-4x fa-gamepad"></i>
+                    <h2>بازی</h2>
+                </a>
+            </div>
+            <div class="col-md-1 col-xs-2">
+                <a href="">
+                    <i class="fa fa-4x fa-camera"></i>
+                    <h2>هنر دیجیتال</h2>
+                </a>
+            </div>
+            <div class="col-md-1 col-xs-2">
+                <a href="">
+                    <i class="fa fa-4x fa-mobile-phone"></i>
+                    <h2>موبایل و تبلت</h2>
+                </a>
+            </div>
+            <div class="col-md-1 col-xs-2">
+                <a href="">
+                    <i class="fa fa-4x fa-laptop"></i>
+                    <h2>لپ تاپ</h2>
+                </a>
+            </div>
+            <div class="col-md-1 col-xs-2">
+                <a href="">
+                    <i class="fa fa-4x fa-car"></i>
+                    <h2>خودرو</h2>
+                </a>
+            </div>
+            <div class="col-md-1 col-xs-2">
+                <a href="">
+                    <i class="fa fa-4x fa-rocket"></i>
+                    <h2>هوا و فضا</h2>
+                </a>
+            </div>
+            <div class="col-md-1 col-xs-2">
+                <a href="">
+                    <i class="fa fa-4x fa-hospital-o"></i>
+                    <h2>پزشکی</h2>
+                </a>
+            </div>
+            <div class="col-md-1 col-xs-2">
+                <a href="">
+                    <i class="fa fa-4x fa-windows"></i>
+                    <h2>نرم افزار</h2>
+                </a>
+            </div>
+            <div class="col-md-1 col-xs-2">
+                <a href="">
+                    <i class="fa fa-4x fa-television"></i>
+                    <h2>صوت و تصویر</h2>
+                </a>
+            </div>
+            <div class="col-md-1 col-xs-2">
+                <a href="">
+                    <i class="fa fa-4x fa-share-square"></i>
+                    <h2>شبکه های اجتماعی</h2>
+                </a>
+            </div>
+            <div class="col-md-1 col-xs-2">
+                <a href="">
+                    <i class="fa fa-4x fa-newspaper-o"></i>
+                    <h2>سیاسی</h2>
+                </a>
+            </div>
         </section>
     </div>
 @endsection

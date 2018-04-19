@@ -145,6 +145,7 @@
             <h1 class="page-header">@yield('pagetitle')</h1>
         </div>
     </div><!--/.row-->
+    @include('partiuals.success')
     @yield('content')
 </div>	<!--/.main-->
 

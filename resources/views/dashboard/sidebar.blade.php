@@ -87,7 +87,7 @@
                     </a>
                 </li>
                 <li>
-                    <a class="" href="{{route('rss.create')}}">
+                    <a class="" href="{{route('adminpanel.hottags')}}">
                         <span class="fa fa-arrow-left">&nbsp;</span>مدیریت تگ های صفحه ای
                     </a>
                 </li>
