@@ -297,3 +297,62 @@ section{
     display: block;
     text-align: center;
 }
+.padding5 {
+    padding: 5px;
+}
+.right {
+    float: right;
+}
+.news_box {
+    padding: 10px;
+    padding-bottom: 10px;
+    background: #FFF;
+    border-radius: 10px;
+    -moz-border-radius: 10px;
+    box-shadow: 1px 2px 3px rgba(0,0,0,0.12);
+    border: 1px solid #fff;
+    padding-bottom: 35px;
+    overflow: hidden;
+}
+.box_head, .box_head2 {
+    width: 110%;
+    padding: 10px;
+    background: #fff url(http://www.shahrekhabar.com/images/bg3.gif);
+    margin: -10px -11px 10px 0;
+    border-bottom: 2px solid #f9243f;
+    border-radius: 10px 10px 0 0;
+    -moz-border-radius: 10px 10px 0 0;
+}
+.box_head a, .box_head2 a {
+    font-weight: bold;
+    color: #444;
+    padding: 0 30px 0 0;
+    display: block;
+    background: url(http://www.shahrekhabar.com/images/news.png) right no-repeat;
+}
+.news_box ul li, .news_box2 ul li {
+    display: block;
+    width: 100%;
+    float: right;
+    background: url(http://www.shahrekhabar.com/images/tik.gif) no-repeat right top;
+    padding: 0 15px 0 0;
+    margin: 5px 0;
+    font-size: 12px;
+    overflow: hidden;
+    height: 20px;
+    cursor: pointer;
+}
+.news_box ul{
+    padding:5px;
+    margin:0px;
+}
+.news_box ul li a.newstitle{
+    width:80%;
+    display: inline-block;
+}
+.pagination{
+    direction: ltr;
+}
+.ltr{
+    direction: ltr;
+}

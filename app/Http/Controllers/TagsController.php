@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Menu;
 use App\Tag;
 use Illuminate\Http\Request;
 
@@ -47,7 +48,10 @@ class TagsController extends Controller
     public function show($tagname)
     {
         $key = str_replace('-',' ',$tagname);
-        return Tag::where('name',$key)->first();
+        $hottags = Menu::where('name','hottags')->first()->tags;
+        $tag = Tag::where('name',$key)->first();
+        $posts = $tag->posts()->orderBy('created_at','desc')->paginate(30);
+        return view('website.showtag',compact('hottags','posts','tagname'))->withPatch('tags/'.str_replace(' ','-',$key));
     }
 
     /**

@@ -17,4 +17,9 @@ class Category extends Model
         return $this->belongsToMany('App\Rss');
     }
 
+    public function homebox()
+    {
+        return $this->hasOne('App\HomeBox');
+    }
+
 }

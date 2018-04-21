@@ -23,7 +23,8 @@ Route::get('/', function () {
         ->orderBy(\DB::raw('ABS(postmeta.meta_value)'), 'DESC')
         ->take(4)->get();
     $hottags = \App\Menu::where('name','hottags')->first()->tags;
-    return view('website.homepage',compact('mostviews','hottags'));
+    $homeboxes = \App\HomeBox::orderBy('periorty','asc')->with('category')->get();
+    return view('website.homepage',compact('mostviews','hottags','homeboxes'));
 });
 
 Auth::routes();
@@ -40,6 +41,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('adminpanel/tags','DashboardsController@alltags')->name('adminpanel.tags');
     Route::get('adminpanel/tags/hottags','DashboardsController@hottags')->name('adminpanel.hottags');
     Route::post('adminpanel/tags/hottags','DashboardsController@hottagssave')->name('adminpanel.savehottags');
+    Route::get('adminpanel/homepage/homebox','DashboardsController@managehomebox')->name('adminpanel.managehomebox');
+    Route::post('adminpanel/homepage/homebox','DashboardsController@edithomebox')->name('adminpanel.managehomebox');
     Route::post('posts/deactive','PostsController@deactive')->name('posts.deactive');
     Route::post('posts/republish','PostsController@republish')->name('posts.republish');
 });
@@ -48,22 +51,6 @@ Route::resource('rss','RssController');
 Route::resource('tags','TagsController');
 Route::resource('posts','PostsController');
 Route::get('tags/{tagname}','TagsController@show');
-
-
-//class exclusive_functions{
-//
-//    public function select($query)
-//    {
-//        return DB::select($query);
-//    }
-//
-//    public function delete($table,$coloumn,$if,$value)
-//    {
-//        return DB::table($table)->where($coloumn, $if, $value)->delete();
-//    }
-//
-//}
-//$myexclusive = new exclusive_functions();
 
 
 

@@ -13,14 +13,14 @@ class CreateMenuTagTable extends Migration
      */
     public function up()
     {
-        Schema::create('menu_tag', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('menu_id');
-            $table->integer('tag_id');
-
-            $table->foreign('menu_id')->references('id')->on('menu');
-            $table->foreign('tag_id')->references('id')->on('tags');
-        });
+//        Schema::create('menu_tag', function (Blueprint $table) {
+//            $table->increments('id');
+//            $table->integer('menu_id');
+//            $table->integer('tag_id');
+//
+//            $table->foreign('menu_id')->references('id')->on('menu');
+//            $table->foreign('tag_id')->references('id')->on('tags');
+//        });
     }
 
     /**
@@ -30,6 +30,6 @@ class CreateMenuTagTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('menu_tag');
+//        Schema::dropIfExists('menu_tag');
     }
 }

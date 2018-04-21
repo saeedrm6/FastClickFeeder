@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\HomeBox;
 use App\Menu;
 use App\Rss;
 use App\Tag;
@@ -83,5 +84,36 @@ class DashboardsController extends Controller
         $menu = Menu::where('name','hottags')->first();
         $menu->tags()->sync($request->input('hottags'));
         return redirect(route('adminpanel.hottags'))->with('success','تگ های داغ بروز شدند');
+    }
+
+    public function managehomebox(Request $request)
+    {
+        if (!$request->input('id')){
+            $allcategory = Category::with('homebox')->get();
+            return view('dashboard.managebox',compact('allcategory'));
+        }else{
+            $cat=Category::find($request->input('id'));
+            $box = $cat->homebox;
+            return view('dashboard.manageboxid',compact('cat','box'));
+        }
+
+    }
+
+    public function edithomebox(Request $request)
+    {
+        if ($request->input('periorty')){
+            $homebox = HomeBox::where('category_id',$request->input('cat_id'))->first();
+            if ($homebox){
+                $cat = Category::find($request->input('cat_id'));
+                $cat->homebox()->save($homebox);
+                return redirect(route('adminpanel.managehomebox'))->with('success','الویت نمایش بروز شد');
+            }else{
+                $homebox = new HomeBox();
+                $homebox->periorty =$request->input('periorty');
+                $cat = Category::find($request->input('cat_id'));
+                $cat->homebox()->save($homebox);
+                return redirect(route('adminpanel.managehomebox'))->with('success','الویت نمایش بروز شد');
+            }
+        }
     }
 }
