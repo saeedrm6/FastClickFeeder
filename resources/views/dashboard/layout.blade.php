@@ -17,6 +17,8 @@
     <link href="{{asset('dashboard/css/datepicker3.css')}}" rel="stylesheet">
     <link href="{{asset('dashboard/css/styles.css')}}" rel="stylesheet">
     <link href="{{ asset('css/select2.min.css') }}" rel="stylesheet" />
+    <script src='{{asset('js/tinymce/tinymce.min.js')}}'></script>
+    @yield('headmeta')
 
     <!--Theme Switcher-->
     <style id="hide-theme">

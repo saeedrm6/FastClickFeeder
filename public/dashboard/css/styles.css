@@ -1050,3 +1050,6 @@ p.back-link {
 .pagination{
   direction: ltr;
 }
+.mce-container iframe body{
+  direction: rtl !important;
+}

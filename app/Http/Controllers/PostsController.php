@@ -47,23 +47,6 @@ class PostsController extends Controller
      */
     public function show(Post $post)
     {
-        #get view count
-        #return $post->getview->meta_value;
-
-
-        #Get most view posts with date and time parameter
-//            return \DB::table('posts')
-//                ->join('postmeta', 'posts.id', '=', 'postmeta.post_id')
-//                ->whereDate('created_at','2018-04-13')
-//                ->whereTime('created_at', '<', '15:33')
-//                ->orderBy(\DB::raw('ABS(postmeta.meta_value)'), 'DESC')
-//                ->paginate(15);
-
-        #Get tags that have more posts
-//        return Tag::withCount('posts')->orderBy('posts_count', 'desc')->paginate(10);
-
-
-
         if ($post->status == 'publish'){
             $post->setview($post->id);
             return view('posts.layout',compact('post'));
@@ -119,5 +102,15 @@ class PostsController extends Controller
         $post->status = 'publish';
         $post->update();
         return back();
+    }
+
+    public function showpage($title)
+    {
+        $post = Post::where('post_type','page')->where('title',str_replace('-',' ',$title))->first();
+        if ($post){
+            $post->setview($post->id);
+            return view('posts.layout',compact('post'));
+        }
+        abort(404);
     }
 }

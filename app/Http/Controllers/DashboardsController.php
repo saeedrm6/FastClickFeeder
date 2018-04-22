@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use App\Category;
 use App\HomeBox;
 use App\Menu;
+use App\PostMeta;
 use App\Rss;
 use App\Tag;
 use Illuminate\Http\Request;
 use App\Post;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Cache;
 
@@ -115,5 +117,56 @@ class DashboardsController extends Controller
                 return redirect(route('adminpanel.managehomebox'))->with('success','الویت نمایش بروز شد');
             }
         }
+    }
+
+    public function allpages()
+    {
+        return view('dashboard.allpages');
+    }
+
+    public function createpage()
+    {
+        return view('dashboard.createpage');
+    }
+
+    public function savepage(Request $request)
+    {
+        $check = Post::where('permalink',env('APP_URL').'/posts/'.str_replace(' ','-',$request->input('title')))->get();
+        if (count($check)==0){
+            $permalink = env('APP_URL').'/pages/'.str_replace(' ','-',$request->input('title'));
+        }else{
+            $permalink = env('APP_URL').'/pages/'.str_replace(' ','-',$request->input('title')).'-2';
+        }
+        $post = Post::create([
+            'user_id'   => Auth::user()->id,
+            'title'     => $request->input('title'),
+            'content'   => $request->input('content'),
+            'status'    => $request->input('status'),
+            'post_type' => 'page',
+            'permalink' => $permalink
+        ]);
+        if ($post){
+            $meta = new PostMeta();
+            $meta->meta_key = 'views';
+            $meta->meta_value = 0;
+            $post->postmetas()->save($meta);
+            return redirect(route('adminpanel.editpage',['id' => $post->id]))->with('success','برگه مورد نظر ساخته شد');
+        }
+    }
+
+    public function editpage($id)
+    {
+        $post = Post::find($id);
+        if ($post){
+            return view('dashboard.editpage',compact('post'));
+        }
+        abort(404);
+    }
+
+    public function updatepage($id,Request $request)
+    {
+        $post = Post::find($id);
+        $post->update($request->all());
+        return redirect(route('adminpanel.editpage',['id' => $post->id]));
     }
 }

@@ -107,6 +107,24 @@
             </ul>
         </li>
 
+        <li {{{ (Request::is('adminpanel/pages/') ? 'class=active parent' : 'parent') }}}>
+            <a data-toggle="collapse" href="#sub-item-6" class="collapsed" aria-expanded="false">
+                <em class="fa fa-file">&nbsp;</em> برگه ها <span data-toggle="collapse" href="#sub-item-6" class="icon pull-left collapsed" aria-expanded="false"><em class="fa fa-plus"></em></span>
+            </a>
+            <ul class="children collapse" id="sub-item-6" aria-expanded="false" style="height: 0px;">
+                <li>
+                    <a class="" href="{{route('adminpanel.allpages')}}">
+                        <span class="fa fa-arrow-left">&nbsp;</span>همه ی برگه ها
+                    </a>
+                </li>
+                <li>
+                    <a class="" href="{{route('adminpanel.newpage')}}">
+                        <span class="fa fa-arrow-left">&nbsp;</span>افزودن برگه
+                    </a>
+                </li>
+            </ul>
+        </li>
+
         <li><a href=""><em class="fa fa-money">&nbsp;</em> امور مالی</a></li>
         <li><a onclick="event.preventDefault(); document.getElementById('logout-form').submit();" href="{{ route('logout') }}"><em class="fa fa-sign-out">&nbsp;</em> خروج</a></li>
 

@@ -43,6 +43,11 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('adminpanel/tags/hottags','DashboardsController@hottagssave')->name('adminpanel.savehottags');
     Route::get('adminpanel/homepage/homebox','DashboardsController@managehomebox')->name('adminpanel.managehomebox');
     Route::post('adminpanel/homepage/homebox','DashboardsController@edithomebox')->name('adminpanel.managehomebox');
+    Route::get('adminpanel/pages/allpages','DashboardsController@allpages')->name('adminpanel.allpages');
+    Route::get('adminpanel/pages/newpage','DashboardsController@createpage')->name('adminpanel.newpage');
+    Route::get('adminpanel/pages/editpage/{id}','DashboardsController@editpage')->name('adminpanel.editpage');
+    Route::post('adminpanel/pages/editpage/{id}','DashboardsController@updatepage')->name('adminpanel.updatepage');
+    Route::post('adminpanel/pages/newpage','DashboardsController@savepage')->name('adminpanel.savepage');
     Route::post('posts/deactive','PostsController@deactive')->name('posts.deactive');
     Route::post('posts/republish','PostsController@republish')->name('posts.republish');
 });
@@ -51,7 +56,7 @@ Route::resource('rss','RssController');
 Route::resource('tags','TagsController');
 Route::resource('posts','PostsController');
 Route::get('tags/{tagname}','TagsController@show');
-
+Route::get('pages/{title}','PostsController@showpage');
 
 
 
