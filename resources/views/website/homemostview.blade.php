@@ -23,7 +23,7 @@
 
                     </div>
                     <footer class="card-footer">
-                        <p class="no-margin">{{$mostview->created_at}}</p>
+                        <p class="no-margin">{{\Morilog\Jalali\jDateTime::strftime('Y-m-d', strtotime(date('Y-m-d', strtotime($mostview->created_at))))}} ساعت : {{date('G:i',strtotime($mostview->created_at))}}</p>
                     </footer>
                 </div>
             </div>

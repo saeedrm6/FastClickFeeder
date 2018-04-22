@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use App\Menu;
 use App\Tag;
 use Illuminate\Http\Request;
-
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Redis;
+use Illuminate\Support\Facades\Cache;
 class TagsController extends Controller
 {
     /**
@@ -50,7 +53,13 @@ class TagsController extends Controller
         $key = str_replace('-',' ',$tagname);
         $hottags = Menu::where('name','hottags')->first()->tags;
         $tag = Tag::where('name',$key)->first();
-        $posts = $tag->posts()->orderBy('created_at','desc')->paginate(30);
+
+        $currentPage = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+        $posts = Cache::remember('postoftag-'.$tagname.'-'.$currentPage,1,function () use($tagname,$key,$hottags,$tag){
+            return $tag->posts()->orderBy('created_at','desc')->paginate(30);
+        });
+
+
         return view('website.showtag',compact('hottags','posts','tagname'))->withPatch('tags/'.str_replace(' ','-',$key));
     }
 
