@@ -106,7 +106,10 @@
                                             foreach ($RssCategory as $id){
                                                 $RSSids[]=$id->rss_id;
                                             }
-                                            $posts = \App\Post::whereIn('rss_id',$RSSids)->orderBy('created_at','desc')->take(10)->get();
+//                                            $posts = \App\Post::whereIn('rss_id',$RSSids)->orderBy('created_at','desc')->take(10)->get();
+                                            $posts = \Illuminate\Support\Facades\Cache::remember('homebox-category-'.$box->category->id,1,function () use ($RSSids){
+                                                return \App\Post::whereIn('rss_id',$RSSids)->orderBy('created_at','desc')->take(10)->get();
+                                            });
                                         }
                                     ?>
                                     @if($posts)
