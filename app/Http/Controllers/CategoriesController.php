@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\CategoryRss;
+use App\Post;
 use App\Rss;
 use App\RssHistory;
 use Gate;
@@ -66,12 +67,12 @@ class CategoriesController extends Controller
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function show(Category $category)
+    public function show($slug)
     {
-        if (Auth::check()){
-            dd($category);
-        }
-        abort(404);
+        $category = Category::where('slug',$slug)->first();
+        $rss = $category->rss;
+        $posts = Post::whereIn('rss_id',$rss)->orderBy('created_at','desc')->paginate(30);
+        dd($posts);
     }
 
     /**

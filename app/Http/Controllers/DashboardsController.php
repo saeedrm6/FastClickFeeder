@@ -143,6 +143,7 @@ class DashboardsController extends Controller
             'title'     => $request->input('title'),
             'content'   => $request->input('content'),
             'status'    => $request->input('status'),
+            'excerpt'    => $request->input('excerpt'),
             'post_type' => 'page',
             'permalink' => $permalink
         ]);

@@ -20,6 +20,7 @@ Route::get('/', function () {
         ->join('postmeta', 'posts.id', '=', 'postmeta.post_id')
         ->whereDate('created_at',$today)
         ->whereTime('created_at', '>', '00:00')
+        ->where('post_type','!=','page')
         ->orderBy(\DB::raw('ABS(postmeta.meta_value)'), 'DESC')
         ->take(4)->get();
     $hottags = \App\Menu::where('name','hottags')->first()->tags;

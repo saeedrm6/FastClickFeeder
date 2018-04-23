@@ -53,5 +53,8 @@
         <div class="clearfix"></div>
         <br>
         <textarea id="mytextarea" name="content" dir="rtl" class="text-right"></textarea>
+        <br>
+        <label for="excerpt">چکیده مطلب</label>
+        <textarea name="excerpt" id="excerpt" cols="30" rows="6" class="form-control"></textarea>
     </form>
 @endsection
