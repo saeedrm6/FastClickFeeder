@@ -43,7 +43,7 @@
                                 @endforeach
                         </td>
                         <td>
-                            {{$post->created_at}}
+                            {{\Morilog\Jalali\jDateTime::strftime('Y-m-d', strtotime(date('Y-m-d', strtotime($post->created_at))))}} ساعت : {{date('G:i',strtotime($post->created_at))}}
                         </td>
                         <td>{{$post->getview->meta_value}}</td>
                         <td>

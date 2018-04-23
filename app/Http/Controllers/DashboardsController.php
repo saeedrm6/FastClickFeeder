@@ -121,7 +121,8 @@ class DashboardsController extends Controller
 
     public function allpages()
     {
-        return view('dashboard.allpages');
+        $posts = Post::where('post_type','page')->paginate(20);
+        return view('dashboard.allpages',compact('posts'))->withPatch('adminpanel/pages/allpages');
     }
 
     public function createpage()
