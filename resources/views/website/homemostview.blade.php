@@ -20,10 +20,10 @@
                     <div class="card-body">
                         <ul class="cat-list clearfix">
                             @foreach($rss->categories as $category)
-                                <li><a class="cat-label" href="http://waulah.uipro.net/category/internet/" style="background-color:#808e9b; padding: 2px;" title="{{$category->name}}">{{$category->name}}</a></li>
+                                <li><a class="cat-label" href="{{route('category.show',[$category->slug])}}" style="background-color:#808e9b; padding: 2px;" title="{{$category->name}}">{{$category->name}}</a></li>
                             @endforeach
                         </ul>
-                        <h3 class="link-url"><a target="_blank" href="{{route('posts.show',[$mostview->id])}}" title="{{$mostview->title}}" class="text-justify">{{$mostview->title}}</a></h3>
+                        <h3 class="link-url"><a target="_blank" href="{{route('posts.show',[$mostview->post_id])}}" title="{{$mostview->title}}" class="text-justify">{{$mostview->title}}</a></h3>
 
                     </div>
                     <footer class="card-footer">

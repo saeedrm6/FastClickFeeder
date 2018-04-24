@@ -55,17 +55,40 @@ class IndexNews extends Command
                     $getposts = Post::where('post_type','=','rss')->where('permalink','=',$entry->link)->get();
 //                    $query = "select `id` from posts where `post_type`='rss' AND `permalink` Like '{$entry->link}'";
                     if (count($getposts)==0){
-                        $post = Post::create([
-                            'user_id'   =>  1,
-                            'rss_id'   =>  $rss->id,
-                            'title'   =>  (string)$entry->title,
-                            'content'   =>  null,
-                            'excerpt'   =>  (string)$entry->description,
-                            'status'   =>  'publish',
-                            'comment_status'   =>  'open',
-                            'post_type'   =>  'rss',
-                            'permalink'   =>  (string)$entry->link,
-                        ]);
+                        $date = explode("+",$entry->pubDate);
+                        $pubDate = date("Y-m-d H:i:s",strtotime($date[0]));
+
+//                        $post = Post::create([
+//                            'user_id'   =>  1,
+//                            'rss_id'   =>  $rss->id,
+//                            'title'   =>  (string)$entry->title,
+//                            'content'   =>  null,
+//                            'excerpt'   =>  (string)$entry->description,
+//                            'status'   =>  'publish',
+//                            'comment_status'   =>  'open',
+//                            'post_type'   =>  'rss',
+//                            'permalink'   =>  (string)$entry->link,
+//                            'created_at'    =>  (string)$pubDate,
+//                            'updated_at'    =>  (string)$pubDate
+//                        ]);
+                        
+
+                        $post = new Post();
+                        $post->user_id = 1;
+                        $post->rss_id = $rss->id;
+                        $post->title = (string)$entry->title;
+                        $post->content = null;
+                        $post->excerpt = (string)$entry->description;
+                        $post->status = 'publish';
+                        $post->comment_status = 'open';
+                        $post->post_type = 'rss';
+                        $post->permalink = (string)$entry->link;
+                        $post->created_at = (string)$pubDate;
+                        $post->updated_at = (string)$pubDate;
+                        $post->save();
+
+
+
                         $meta = new PostMeta();
                         $meta->meta_key = 'views';
                         $meta->meta_value = 0;

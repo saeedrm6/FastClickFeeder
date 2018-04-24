@@ -107,7 +107,7 @@ class Feed_Miro
 add urls
  *********/
 
-$urls = array( 'http://www.farsnews.com/rss/social', 'http://www.farsnews.com/rss/economy','http://www.farsnews.com/rss/world','http://www.farsnews.com/rss/universities' );
+$urls = array( 'https://click.ir/feed' );
 
 try
 {
@@ -134,10 +134,11 @@ foreach ( $data as $item ) :
     <div class="span4 profile">
         <h3 class="profile-description"><a href="<?php echo $link; ?>" style="text-decoration:none;"><?php echo $title; ?></a></h3>
         <p class="profile-description"><?php echo $description; ?><br>
-            published: <?php echo $pubDate; ?> <a href="<?php echo $link ?>" target="_blank">more</a></p>
+            published: <?php echo date("Y-m-d H:i:s",strtotime($pubDate)); ?> <a href="<?php echo $link ?>" target="_blank">more</a></p>
     </div>
 <?php
 endforeach;
-
-//die();
+//echo date("Y-m-d H:i:s",strtotime('April 24, 2018, 3:50 PM'));
+//echo  date("H:i:s",strtotime('April 24, 2018, 3:50 PM'));
+die();
 ?>

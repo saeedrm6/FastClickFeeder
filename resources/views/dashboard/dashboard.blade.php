@@ -66,7 +66,7 @@
                             </tr>
                             @foreach($mostview as $view)
                                 <tr>
-                                    <td><a href="{{route('posts.show',[$view->id])}}">{{$view->title}}</a></td>
+                                    <td><a href="{{route('posts.show',[$view->post_id])}}">{{$view->title}}</a></td>
                                     <td>{{$view->meta_value}}</td>
                                 </tr>
                             @endforeach

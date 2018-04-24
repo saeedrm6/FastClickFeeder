@@ -107,6 +107,7 @@ class PostsController extends Controller
     public function showpage($title)
     {
         $post = Post::where('post_type','page')->where('title',str_replace('-',' ',$title))->first();
+
         if ($post){
             $post->setview($post->id);
             return view('page.layout',compact('post'));
