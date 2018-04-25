@@ -16,13 +16,26 @@ use Illuminate\Support\Facades\Cache;
 
 Route::get('/', function () {
     $today = date('Y-m-d');
-    $mostviews = \DB::table('posts')
-        ->join('postmeta', 'posts.id', '=', 'postmeta.post_id')
-        ->whereDate('created_at',$today)
-        ->whereTime('created_at', '>', '00:00')
-        ->where('post_type','!=','page')
-        ->orderBy(\DB::raw('ABS(postmeta.meta_value)'), 'DESC')
-        ->take(4)->get();
+//    $mostviews = \DB::table('posts')
+//        ->join('postmeta', 'posts.id', '=', 'postmeta.post_id')
+//        ->whereDate('created_at',$today)
+//        ->whereTime('created_at', '>', '00:00')
+//        ->where('post_type','!=','page')
+//        ->orderBy(\DB::raw('ABS(postmeta.meta_value)'), 'DESC')
+//        ->orderBy('created_at','DESC')
+//        ->take(4)->get();
+
+    $mostviews = Cache::remember('mostviewofhomepage',1,function () use($today){
+        return \DB::table('posts')
+            ->join('postmeta', 'posts.id', '=', 'postmeta.post_id')
+            ->whereDate('created_at',$today)
+            ->whereTime('created_at', '>', '00:00')
+            ->where('post_type','!=','page')
+            ->orderBy(\DB::raw('ABS(postmeta.meta_value)'), 'DESC')
+            ->orderBy('created_at','DESC')
+            ->take(4)->get();
+    });
+
     $hottags = \App\Menu::where('name','hottags')->first()->tags;
     $homeboxes = \App\HomeBox::orderBy('periorty','asc')->with('category')->get();
     return view('website.homepage',compact('mostviews','hottags','homeboxes'));

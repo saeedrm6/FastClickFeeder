@@ -14,7 +14,7 @@
                     <div class="overlay" style="background-color:<?php echo $colors[$counter];?>;"></div>
                     <header class="card-header">
                         <ul class="list-inline post-stats">
-                            {{--<li><i class="fa fa-eye"></i> {{$mostview->meta_value}}</li>--}}
+                            <li><i class="fa fa-eye"></i> {{$mostview->meta_value}}</li>
                         </ul>
                     </header>
                     <div class="card-body">

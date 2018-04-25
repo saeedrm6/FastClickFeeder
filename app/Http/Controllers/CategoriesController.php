@@ -4,12 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\CategoryRss;
+use App\Menu;
 use App\Post;
 use App\Rss;
 use App\RssHistory;
 use Gate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redis;
+use Illuminate\Support\Facades\Cache;
 
 class CategoriesController extends Controller
 {
@@ -70,9 +73,18 @@ class CategoriesController extends Controller
     public function show($slug)
     {
         $category = Category::where('slug',$slug)->first();
-        $rss = $category->rss;
-        $posts = Post::whereIn('rss_id',$rss)->orderBy('created_at','desc')->paginate(30);
-        dd($posts);
+        $rsses = $category->rss;
+        $rss_id=array();
+        foreach ($rsses as $rss){
+            $rss_id[]=$rss->id;
+        }
+        $hottags = Menu::where('name','hottags')->first()->tags;
+        $currentPage = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+        $posts = Cache::remember('postofcategory-'.$category->id.'-'.$currentPage,1,function () use($rss_id){
+            return Post::whereIn('rss_id',$rss_id)->orderBy('created_at','desc')->paginate(30);
+        });
+
+        return view('website.showcategory',compact('posts','category','hottags'))->withPatch('category/'.str_replace(' ','-',$category->slug));
     }
 
     /**

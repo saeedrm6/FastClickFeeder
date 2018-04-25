@@ -2,6 +2,9 @@
 
 @section('header')
     <title>وبگردی 24 - آخرین اخبار {{$tagname}}</title>
+    <meta name="description" content="لحظه به لحظه با آخرین اخبار {{$tagname}} - وبگردی 24"/>
+    <meta property="keywords" content="{{$tagname}}">  <!-- Develop -->
+    <meta name="ROBOTS" content="index,follow"/>
 @endsection
 
 @section('content')
@@ -36,4 +39,5 @@
             </div>
         </section>
     </div>
+    @include('website.footer')
 @endsection

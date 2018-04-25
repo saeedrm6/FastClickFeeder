@@ -71,7 +71,7 @@ class IndexNews extends Command
 //                            'created_at'    =>  (string)$pubDate,
 //                            'updated_at'    =>  (string)$pubDate
 //                        ]);
-                        
+
 
                         $post = new Post();
                         $post->user_id = 1;
