@@ -13,13 +13,13 @@ class CreateHomeboxTable extends Migration
      */
     public function up()
     {
-        Schema::create('homebox', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('category_id')->unsigned();
-            $table->integer('periorty')->default(5);
-
-            $table->foreign('category_id')->references('categories')->on('id');
-        });
+//        Schema::create('homebox', function (Blueprint $table) {
+//            $table->increments('id');
+//            $table->integer('category_id')->unsigned();
+//            $table->integer('periorty')->default(5);
+//
+//            $table->foreign('category_id')->references('categories')->on('id');
+//        });
     }
 
     /**
@@ -29,6 +29,6 @@ class CreateHomeboxTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('homebox');
+//        Schema::dropIfExists('homebox');
     }
 }

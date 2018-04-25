@@ -104,6 +104,11 @@
                         <span class="fa fa-arrow-left">&nbsp;</span>باکس اخبار صفحه اصلی
                     </a>
                 </li>
+                <li>
+                    <a class="" href="{{route('adminpanel.managehomebox')}}">
+                        <span class="fa fa-arrow-left">&nbsp;</span>منوی دسته بندی اخبار
+                    </a>
+                </li>
             </ul>
         </li>
 

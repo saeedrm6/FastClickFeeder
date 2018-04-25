@@ -14,4 +14,9 @@ class Menu extends Model
     {
         return $this->belongsToMany('App\Tag');
     }
+
+    public function listts()
+    {
+        return $this->belongsToMany('App\Listt');
+    }
 }
