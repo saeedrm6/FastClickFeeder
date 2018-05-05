@@ -26,7 +26,7 @@ Route::get('/', function () {
             ->orderBy('created_at','DESC')
             ->take(4)->get();
     });
-    $menus = \App\Menu::find(2)->listts;
+    $menus = \App\Menu::find(2)->listts->where('status','publish')->all();
     $hottags = \App\Menu::where('name','hottags')->first()->tags;
     $homeboxes = \App\HomeBox::orderBy('periorty','asc')->with('category')->get();
     return view('website.homepage',compact('mostviews','hottags','homeboxes','menus'));
