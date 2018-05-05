@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\HomeBox;
+use App\Listt;
 use App\Menu;
 use App\PostMeta;
 use App\Rss;
@@ -171,4 +172,28 @@ class DashboardsController extends Controller
         $post->update($request->all());
         return redirect(route('adminpanel.editpage',['id' => $post->id]));
     }
+
+    public function menuedit($id)
+    {
+        $menu = Menu::find($id);
+        $lists = Menu::find($id)->listts;
+        return view('dashboard.editmenu',compact('lists','menu'));
+    }
+
+    public function newlistofmenu(Request $request)
+    {
+        $list = Listt::create([
+           'name'   =>  $request->input('name'),
+           'permalink'   =>  $request->input('permalink'),
+           'icon'   =>  $request->input('icon')
+        ]);
+        if ($list){
+            $menu = Menu::find($request->input('menuid'));
+            $menu->listts()->save($list);
+            return back();
+        }
+        abort(404);
+    }
+
+
 }

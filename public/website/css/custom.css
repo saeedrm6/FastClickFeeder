@@ -212,6 +212,8 @@ img {
 .post-card.link-card .link-url {
     margin-top: 10px;
     line-height: 1.0;
+    height: 100px;
+    overflow: hidden;
 }
 .post-card.link-card .link-url::before {
     content: "\f0c1";

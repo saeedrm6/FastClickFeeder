@@ -105,7 +105,7 @@
                     </a>
                 </li>
                 <li>
-                    <a class="" href="{{route('adminpanel.managehomebox')}}">
+                    <a class="" href="{{route('adminpanel.menuedit',['id'=>2])}}">
                         <span class="fa fa-arrow-left">&nbsp;</span>منوی دسته بندی اخبار
                     </a>
                 </li>

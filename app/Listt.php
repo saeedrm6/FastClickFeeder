@@ -8,7 +8,7 @@ class Listt extends Model
 {
     public $timestamps = false;
     public $table = 'listt';
-    protected $fillable = ['name','permalink','icon'];
+    protected $fillable = ['name','permalink','icon','status'];
 
     public function menus()
     {
