@@ -40,7 +40,7 @@
                 <div class="col-md-4 col-xs-12 col3">
                     <div class="search-wrap">
                         <div class="search-inner clearfix">
-
+                            <form action="" method="get"></form>
                         </div>
                     </div>
                 </div>
