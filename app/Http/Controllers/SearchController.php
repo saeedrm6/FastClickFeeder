@@ -19,7 +19,7 @@ class SearchController extends Controller
         #pas majbori az table estefade koni :|
         $hottags = Menu::where('name','hottags')->first()->tags;
         $currentPage = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-        $posts = Cache::remember('postofsearch-'.$key.'-'.$currentPage,1,function () use($key){
+        $posts = Cache::remember('postofsearch-'.$key.'-'.$currentPage,3,function () use($key){
             return DB::table('posts')
                 ->where('title','like','%'.$key.'%')
                 ->orWhere('excerpt','like','%'.$key.'%')

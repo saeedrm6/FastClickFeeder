@@ -1,9 +1,9 @@
 @extends('website.layout')
 
 @section('header')
-    <title>وبگردی 24 - آخرین اخبار {{$tagname}}</title>
-    <meta name="description" content="لحظه به لحظه با آخرین اخبار {{$tagname}} - وبگردی 24"/>
-    <meta property="keywords" content="{{$tagname}}">  <!-- Develop -->
+    <title>وبگردی 24 - آخرین اخبار {{str_replace('-',' ',$tagname)}}</title>
+    <meta name="description" content="لحظه به لحظه با آخرین اخبار {{str_replace('-',' ',$tagname)}} - وبگردی 24"/>
+    <meta property="keywords" content="{{str_replace('-',' ',$tagname)}}">  <!-- Develop -->
     <meta name="ROBOTS" content="index,follow"/>
 @endsection
 
@@ -17,7 +17,7 @@
                 <div class="col-md-12 padding5 right">
                     <div class="news_box">
                         <div class="box_head right">
-                            <a title="آخرین اخبار {{$tagname}}" href="">آخرین اخبار {{$tagname}}</a>
+                            <a title="آخرین اخبار {{str_replace('-',' ',$tagname)}}" href="">آخرین اخبار {{str_replace('-',' ',$tagname)}}</a>
                         </div>
                         <ul class="">
                             @foreach($posts as $post)

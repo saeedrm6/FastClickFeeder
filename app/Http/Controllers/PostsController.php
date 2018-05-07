@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Post;
 use App\Tag;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 class PostsController extends Controller
 {
@@ -48,8 +49,30 @@ class PostsController extends Controller
     public function show(Post $post)
     {
         if ($post->status == 'publish'){
+            $today = date('Y-m-d');
+            $mostviewsR = Cache::remember('mostviewofpostR',5,function () use($today){
+                return \DB::table('posts')
+                    ->join('postmeta', 'posts.id', '=', 'postmeta.post_id')
+                    ->whereDate('created_at',$today)
+                    ->whereTime('created_at', '>', '00:00')
+                    ->where('post_type','!=','page')
+                    ->orderBy(\DB::raw('ABS(postmeta.meta_value)'), 'DESC')
+                    ->orderBy('created_at','DESC')
+                    ->take(5)->get();
+            });
+            $mostviewsL = Cache::remember('mostviewofpostL',5,function () use($today){
+                return \DB::table('posts')
+                    ->join('postmeta', 'posts.id', '=', 'postmeta.post_id')
+                    ->whereDate('created_at',$today)
+                    ->whereTime('created_at', '>', '00:00')
+                    ->where('post_type','!=','page')
+                    ->orderBy(\DB::raw('ABS(postmeta.meta_value)'), 'DESC')
+                    ->orderBy('created_at','DESC')
+                    ->offset(5)
+                    ->take(5)->get();
+            });
             $post->setview($post->id);
-            return view('posts.layout',compact('post'));
+            return view('posts.layout',compact('post','mostviewsR','mostviewsL'));
         }
         abort(404);
     }
