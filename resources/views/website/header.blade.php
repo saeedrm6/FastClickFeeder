@@ -40,8 +40,8 @@
                 <div class="col-md-4 col-xs-12 col3">
                     <div class="search-wrap">
                         <div class="search-inner clearfix">
-                            <form action="{{route('searchquery',['key'=>'query'])}}" method="get">
-                                {{--{{csrf_field()}}--}}
+                            <form action="/search/" method="get">
+{{--                                {{csrf_field()}}--}}
                                 <input type="text" name="q" placeholder="جستجو...">
                                 <input type="submit" value="جستجو">
                             </form>

@@ -12,8 +12,9 @@ use Illuminate\Support\Facades\Cache;
 
 class SearchController extends Controller
 {
-    public function search($key)
+    public function search(Request $request)
     {
+        $key = $request->q;
         #Note:
         #agar az Model bekhaei 2ta where begiri dar vaghe oon AND where hastesh na OR where
         #pas majbori az table estefade koni :|

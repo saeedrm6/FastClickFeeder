@@ -69,5 +69,6 @@ Route::resource('tags','TagsController');
 Route::resource('posts','PostsController');
 Route::get('tags/{tagname}','TagsController@show');
 Route::get('pages/{title}','PostsController@showpage');
-Route::get('search/{key}','SearchController@search')->name('searchquery');
+//Route::get('search/?q={key}','SearchController@search')->name('searchquery');
+Route::get('/search',['uses' => 'SearchController@search','as' => 'search']);
 
