@@ -37,6 +37,7 @@
             height: 100%;
             display: block;
             position: absolute;
+            border:none;
         }
         .toplink{
             display: block;height: 18px;overflow: hidden;
